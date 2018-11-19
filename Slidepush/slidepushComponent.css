@@ -1,0 +1,102 @@
+.slidepush-old {
+  position: fixed;
+  background-color: white;
+  z-index: 51;
+  width: 320px;
+}
+
+.slidepush-old .dropdown .close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+
+.slidepush-old.hide {
+  display: none;
+}
+
+.slidepush-old .list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  height: 100%;
+  width: 337px;
+  overflow: scroll;
+  background-color: white;
+  -webkit-box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.1);
+          box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.1);
+  padding: 10px 0;
+}
+
+.slidepush-old .list > li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 16px;
+}
+
+.slidepush-old .list > li:hover {
+  background-color: rgba(102, 0, 153, 0.08);
+  cursor: pointer;
+}
+
+.slidepush-old .hide {
+  display: none;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+}
+
+body .viewport {
+  max-width: 1228px;
+  margin: 0 auto;
+  background-color: #EEE;
+  height: 100%;
+  position: relative;
+}
+
+body .viewport [data-slide-push-target] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: white;
+  z-index: 51;
+  width: 30rem;
+  -webkit-transition: .3s;
+  transition: .3s;
+}
+
+body .viewport [data-slide-push-target].hide {
+  right: -100%;
+}
+
+body .overlay.active {
+  position: fixed;
+  top: 0;
+  right: calc(50% - (1228px / 2) + 368px);
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.54);
+  overflow: hidden;
+  z-index: 50;
+  -webkit-transition: .3s;
+  transition: .3s;
+}
+/*# sourceMappingURL=slidepushComponent.css.map */

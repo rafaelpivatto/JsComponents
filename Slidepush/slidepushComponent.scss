@@ -1,0 +1,94 @@
+$mouseOverColor: rgba(102, 0, 153, 0.08);
+
+.slidepush-old {
+  position: fixed;
+  background-color: white;
+  z-index: 51;
+  width: 320px;
+  .dropdown {
+    .close {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+    }
+  }
+  //test
+  &.hide {
+    display: none;
+  }
+  //-test
+  .list {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100%;
+    width: 337px;
+    overflow: scroll;
+    background-color: white;
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.1);
+    padding: 10px 0;
+    > li {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 16px;
+      &:hover {
+        background-color: $mouseOverColor;
+        cursor: pointer;
+      }
+    }
+  }
+  .hide {
+    display: none;
+  }
+}
+
+//test
+body {
+  margin: 0;
+  overflow-x: hidden;
+
+  .viewport {
+    max-width: 1228px;
+    margin: 0 auto;
+    background-color: #EEE;
+    height: 100%;
+    position: relative;
+  
+    [data-slide-push-target] {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      background-color: white;
+      z-index: 51;
+      width: 30rem;
+      -webkit-transition: .3s;
+      -o-transition: .3s;
+      transition: .3s;
+        
+      &.hide {
+        right: -100%;
+      }
+    }
+  }
+
+  .overlay {
+    &.active {
+      position: fixed;
+      top: 0;
+      right: calc(50% - (1228px / 2) + 368px);
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,.54);
+      overflow: hidden;
+      z-index: 50;
+      -webkit-transition: .3s;
+      -o-transition: .3s;
+      transition: .3s;
+    }
+  }
+}
+
+
+//-test

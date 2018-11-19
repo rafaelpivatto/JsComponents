@@ -1,0 +1,53 @@
+$scroll-bar-background-color: #ffffff !default;
+$scroll-bar-thumb-color: #edf0f2 !default;
+$scroll-bar-thumb-hover-color: #505050 !default;
+
+.webkit-supported {
+  &::-webkit-scrollbar, ::-webkit-scrollbar {
+    width: 34px;
+    background-color: $scroll-bar-background-color;
+  }
+
+  &::-webkit-scrollbar-thumb, ::-webkit-scrollbar-thumb {
+    border: 12px solid $scroll-bar-background-color;
+    min-height: 75px;
+    background: $scroll-bar-thumb-color;
+    border-radius: 100px;
+  }
+
+  &::-webkit-scrollbar-thumb:active, ::-webkit-scrollbar-thumb:active,
+  &::-webkit-scrollbar-thumb:hover, ::-webkit-scrollbar-thumb:hover {
+    background: $scroll-bar-thumb-hover-color;
+  }
+}
+[data-scroll-target] {
+  .scroll-container {
+      position: relative;
+      overflow: hidden;
+      height: 100%;
+      user-select: none;
+      .scroll-content {
+        position: absolute;
+        width: 100%;
+      }
+      .scrollbar-track {
+        position: absolute;
+        right: 0;
+        width: 25px;
+        height: 100%;
+        background: $scroll-bar-background-color;
+        z-index: 100;
+        .scrollbar-thumb {
+          background: $scroll-bar-thumb-color;
+          position: absolute;
+          height: 90px;
+          border-radius: 100px;
+          padding-right: 10px;
+          
+          &:hover, &:active {
+            background: $scroll-bar-thumb-hover-color;
+          }
+        }
+      }
+    }
+}
