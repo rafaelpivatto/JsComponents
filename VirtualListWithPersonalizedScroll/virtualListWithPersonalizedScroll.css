@@ -1,17 +1,17 @@
-[data-virtual-list] .virtualList {
-  width: 100%;
-  height: 100%;
+[data-virtual-list-container] {
+  width: 400px;
+  height: 300px;
   overflow-x: hidden;
   overflow-y: auto;
   position: relative;
   padding: 0;
 }
 
-[data-virtual-list] .virtualList .scroller .vrow {
+[data-virtual-list-container] .scroller .vrow {
   position: absolute;
 }
 
-[data-virtual-list] .virtualList .simplebar-track .simplebar-scrollbar:before {
+[data-virtual-list-container] .simplebar-track .simplebar-scrollbar:before {
   opacity: 0.5;
 }
 

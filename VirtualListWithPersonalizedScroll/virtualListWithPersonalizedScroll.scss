@@ -1,18 +1,18 @@
-[data-virtual-list] {
-  .virtualList {
-    width: 100%;
-    height: 100%;
-    overflow-x: hidden;
-    overflow-y: auto;
-    position: relative;
-    padding: 0;
-    .scroller {
-      .vrow {
-        position: absolute;
-      }
+[data-virtual-list-container] {
+  width: 400px;
+  height: 300px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: relative;
+  padding: 0;
+  .scroller {
+    .vrow {
+      position: absolute;
     }
-    .simplebar-track {
-      .simplebar-scrollbar:before {
+  }
+  .simplebar-track {
+    .simplebar-scrollbar {
+      &:before {
         opacity: 0.5;
       }
     }

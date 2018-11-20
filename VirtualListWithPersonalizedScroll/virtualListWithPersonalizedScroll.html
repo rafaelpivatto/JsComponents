@@ -5,8 +5,8 @@
     <script src="https://unpkg.com/simplebar@latest/dist/simplebar.js"></script>
   </head>
   <body>
-    <div id="vlist" data-virtual-list style="text-align: center; width:400px; height: 300px; overflow-y: auto;">
-      <div data-virtual-list-container data-scroll-target >
+    <div data-virtual-list-container>
+      <div data-scroll-target> <!-- div apenas para o scroll personalizado -->
         <ul data-virtual-list-scroller>
           <li class='vrow' data-virtual-list-element>I am row number 12801</li>
           <li class='dark' data-virtual-list-element>I am row number 12802</li>
@@ -239,9 +239,9 @@
         </ul>
       </div>
     </div>
-
-    <div id="vlist2" data-virtual-list style="text-align: center; width:400px; height: 200px; overflow-y: auto;">
-      <div data-virtual-list-container data-scroll-target>
+    
+    <div data-virtual-list-container>
+      <div data-scroll-target> <!-- div apenas para o scroll personalizado -->
         <ul data-virtual-list-scroller>
           <li class='vrow' data-virtual-list-element>I am row number 12801</li>
           <li data-virtual-list-element>I am row number 12802</li>
@@ -474,6 +474,7 @@
         </ul>
       </div>
     </div>
+
     <script src="virtualListWithPersonalizedScroll.js"></script>
   </body>
 </html>

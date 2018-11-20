@@ -5,17 +5,12 @@ https://sergimansilla.com/blog/virtual-scrolling/
 
 class VirtualList {
   createScroller(totalHeight) {
-    this.scroller = this.parent.querySelector('[data-virtual-list-scroller]');
+    this.scroller = this.container.querySelector('[data-virtual-list-scroller]');
     this.scroller.classList.add('scroller');
     this.scroller.style.position = 'absolute';
     this.scroller.style.width = '1px';
     this.scroller.style.height = `${totalHeight}px`;
     this.scroller.innerHTML = '';
-  }
-
-  createContainer() {
-    this.container = this.parent.querySelector('[data-virtual-list-container]');
-    this.container.classList.add('virtualList');
   }
 
   renderChunk(fromPos, howMany) {
@@ -27,8 +22,8 @@ class VirtualList {
 
     for (let i = fromPos; i < finalItem; i += 1) {
       item = this.items[i];
-      item.classList.add('vrow');
-      item.style.top = `${i * this.itemHeight}px`;
+      item.classList.add('vrow'); // avaliar se necessário
+      item.style.top = `${i * this.itemHeight}px`; //poderia remover em caso de não ser absolute?
       fragment.appendChild(item);
     }
 
@@ -49,25 +44,29 @@ class VirtualList {
     e.preventDefault();
   }
 
-  constructor(parent) {
-    this.parent = parent;
+  constructor(container) {
+    this.container = container;
 
-    this.items = [];
-    const list = this.parent.querySelectorAll('[data-virtual-list-element]');
-    Array.prototype.forEach.call(list, (item) => {
-      this.items.push(item);
+    //const list = [];
+    //this.items = this.container.querySelectorAll('[data-virtual-list-element]');
+    const list = this.container.querySelectorAll('[data-virtual-list-element]');
+
+    /*
+    let totalHeight = 0;
+    list.forEach((item) => {
+      totalHeight += item.clientHeight;
     });
+    this.totalHeight = totalHeight;
+    */
+    this.items = list;
 
     this.totalRows = this.items && this.items.length;
-    this.itemHeight = this.parent.querySelector('[data-virtual-list-element]').clientHeight;
-    this.createScroller(this.itemHeight * this.totalRows);
-    this.createContainer();
-
-    this.screenItemsLen = Math.ceil(this.container.clientHeight / this.itemHeight) + 1 || 20;
-    this.cachedItemsLen = this.screenItemsLen * 3;
+    this.itemHeight = this.container.querySelector('[data-virtual-list-element]').clientHeight;
+    this.createScroller(this.itemHeight * this.totalRows); //totalHeight
+    
+    this.screenItemsLen = Math.ceil(this.container.clientHeight / this.itemHeight) + 1 || 20; //qtos cabem na tela
+    this.cachedItemsLen = this.screenItemsLen * 3; //qtos itens a serem carregados
     this.renderChunk(0, this.cachedItemsLen / 2);
-
-    this.parent.style.overflow = 'hidden';
 
     this.container.addEventListener('scroll', (e) => {
       this.onScroll(e);
@@ -75,17 +74,12 @@ class VirtualList {
   }
 }
 
-document.querySelectorAll('[data-virtual-list]').forEach((vlist) => {
-  //new VirtualList(vlist);
-  const virtualList = new VirtualList(vlist);
-  const scrollTarget = vlist.querySelector('[data-scroll-target]');
-  if(scrollTarget) {
-    const simplebar = new SimpleBar(scrollTarget, { 
-      autoHide: false 
-    });
-    simplebar.getScrollElement().addEventListener('scroll', function(e){
-      //console.log('scroll', e);
-      virtualList.onScroll(e);
-    });
-  }
+document.querySelectorAll('[data-virtual-list-container]').forEach((container) => {
+  //Virtual List init
+  const virtualList = new VirtualList(container);
+  
+  //scroll personalized init
+  const scrollTarget = container.querySelector('[data-scroll-target]');
+  const simplebar = new SimpleBar(scrollTarget, { autoHide: false });
+  simplebar.getScrollElement().addEventListener('scroll', (e) => virtualList.onScroll(e));
 });
