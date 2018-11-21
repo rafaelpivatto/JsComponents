@@ -45,8 +45,7 @@ class VirtualList {
       itemsToView = 0,
       pixelsAboveofView = 0,
       pixelFitsInsideContainer = 0,
-      indexFirstItemToPrint,
-      indexLastItemToPrint;
+      indexFirstItemToPrint;
 
     for (let i = 0; i <= this.itemsHeight.length ; i++) {
       if (pixelsAboveofView < scrollTop) {
@@ -63,9 +62,16 @@ class VirtualList {
 
     indexFirstItemToPrint = itemsAboveOfView -1 - 5; //5 value will be set 
     indexFirstItemToPrint = indexFirstItemToPrint < 0 ? 0 : indexFirstItemToPrint;
-    indexLastItemToPrint = indexFirstItemToPrint + itemsToView -1 + 10; //10 value will be set
+    itemsToView = itemsToView + 10; //10 value will be set
 
-    this.renderChunk(indexFirstItemToPrint, indexLastItemToPrint);
+    this.renderChunk(indexFirstItemToPrint, itemsToView);
+
+    console.log('==============================================');
+    console.log('itemsAboveOfView', itemsAboveOfView);
+    console.log('indexFirstItemToPrint', indexFirstItemToPrint);
+    console.log('indexFirstItemToPrint', indexFirstItemToPrint);
+    console.log('itemsToView', itemsToView);
+    console.log('pixelFitsInsideContainer', pixelFitsInsideContainer);
 
     e.preventDefault();
   }
