@@ -5,9 +5,22 @@
   overflow-y: auto;
   position: relative;
   padding: 0;
-  .scroller {
-    .vrow {
+  background-color: aquamarine;
+  ul {
+    margin-block-start: 0;
+    li {
       position: absolute;
+      background: linear-gradient(to bottom, #fefefd 0%,#dce3c4 42%,#aebf76 100%);
+      width: 300px;
+      height: 30px;
+      text-align: center;
+      &.medio {
+        height: 100px; 
+      }
+      
+      &.grande {
+        height: 200px;
+      }
     }
   }
   .simplebar-track {
@@ -17,16 +30,7 @@
       }
     }
   }
-}
+} 
 
-[data-virtual-list-element]{
-  background: linear-gradient(to bottom, #fefefd 0%,#dce3c4 42%,#aebf76 100%);
-  width: 300px;
-  height: 30px;
-  text-align: center;
-}  
 
-.dark {
-  background: black !important; 
-}
   

@@ -5,17 +5,16 @@
   overflow-y: auto;
   position: relative;
   padding: 0;
+  background-color: aquamarine;
 }
 
-[data-virtual-list-container] .scroller .vrow {
+[data-virtual-list-container] ul {
+  -webkit-margin-before: 0;
+          margin-block-start: 0;
+}
+
+[data-virtual-list-container] ul li {
   position: absolute;
-}
-
-[data-virtual-list-container] .simplebar-track .simplebar-scrollbar:before {
-  opacity: 0.5;
-}
-
-[data-virtual-list-element] {
   background: -webkit-gradient(linear, left top, left bottom, from(#fefefd), color-stop(42%, #dce3c4), to(#aebf76));
   background: linear-gradient(to bottom, #fefefd 0%, #dce3c4 42%, #aebf76 100%);
   width: 300px;
@@ -23,7 +22,15 @@
   text-align: center;
 }
 
-.dark {
-  background: black !important;
+[data-virtual-list-container] ul li.medio {
+  height: 100px;
+}
+
+[data-virtual-list-container] ul li.grande {
+  height: 200px;
+}
+
+[data-virtual-list-container] .simplebar-track .simplebar-scrollbar:before {
+  opacity: 0.5;
 }
 /*# sourceMappingURL=virtualListWithPersonalizedScroll.css.map */
