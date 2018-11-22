@@ -27,19 +27,6 @@ class VirtualList {
   }
 
   onScroll(e) {
-    /*
-    const maxBuffer = this.screenItemsLen * this.itemHeight,
-      { scrollTop } = e.target;
-    let lastRepaintY,
-      first = parseInt(scrollTop / this.itemHeight, 10) - this.screenItemsLen
-    
-    first = first < 0 ? 0 : first;
-    
-    if (!lastRepaintY || Math.abs(scrollTop - lastRepaintY) > maxBuffer) {
-      this.renderChunk(first, this.cachedItemsLen);
-      lastRepaintY = scrollTop;
-    }
-    */
     const { scrollTop } = e.target;
     let itemsAboveOfView = 0,
       itemsToView = 0,
@@ -60,18 +47,11 @@ class VirtualList {
       pixelsAboveofView += this.itemsHeight[i];
     }
 
-    indexFirstItemToPrint = itemsAboveOfView -1 - 5; //5 value will be set 
+    indexFirstItemToPrint = itemsAboveOfView -1 - 3; //the value can be changed
     indexFirstItemToPrint = indexFirstItemToPrint < 0 ? 0 : indexFirstItemToPrint;
-    itemsToView = itemsToView + 10; //10 value will be set
+    itemsToView = itemsToView + 7; //the value can be changed
 
     this.renderChunk(indexFirstItemToPrint, itemsToView);
-
-    console.log('==============================================');
-    console.log('itemsAboveOfView', itemsAboveOfView);
-    console.log('indexFirstItemToPrint', indexFirstItemToPrint);
-    console.log('indexFirstItemToPrint', indexFirstItemToPrint);
-    console.log('itemsToView', itemsToView);
-    console.log('pixelFitsInsideContainer', pixelFitsInsideContainer);
 
     e.preventDefault();
   }
@@ -79,28 +59,33 @@ class VirtualList {
   constructor(container) {
     this.container = container;
 
-    const list = this.container.querySelectorAll('li'),
-      itemsHeight = [];
+    this.items = this.container.querySelectorAll('li');
+    const itemsHeight = [],
+      containerLength = this.container.clientHeight;
     let totalHeight = 0,
-      top = 0;
+      top = 0,
+      itemsToView = 0,
+      pixelFitsInsideContainer = 0;
 
-    list.forEach((item) => {
-      totalHeight += item.clientHeight;
+    this.items.forEach((item) => {
+      const height = item.clientHeight;
       item.style.top = `${top}px`;
-      top += parseInt(item.clientHeight);
-      itemsHeight.push( item.clientHeight);
+      top += parseInt(height);
+      totalHeight += height;
+      itemsHeight.push(height);
+      if (pixelFitsInsideContainer < containerLength) {
+        itemsToView++;
+        pixelFitsInsideContainer += height; 
+      }
     });
+    itemsToView += 7; //the value can be changed
+
     this.totalHeight = totalHeight;
-    this.items = list;
     this.itemsHeight = itemsHeight;
 
     this.totalRows = this.items && this.items.length;
-    this.itemHeight = this.container.querySelector('li').clientHeight;
     this.createScroller();
-    
-    this.screenItemsLen = Math.ceil(this.container.clientHeight / this.itemHeight) + 1 || 20; //qtos cabem na tela
-    this.cachedItemsLen = this.screenItemsLen * 3; //qtos itens a serem carregados
-    this.renderChunk(0, this.cachedItemsLen / 2);
+    this.renderChunk(0, itemsToView);
 
     this.container.addEventListener('scroll', (e) => {
       this.onScroll(e);
